@@ -1,11 +1,20 @@
 const mongoose = require("mongoose");
+/*const beautifyUnique = require('mongoose-beautiful-unique-validation');
+
+mongoose.plugin(beautifyUnique, {
+  defaultMessage: "duplication detected"
+});
+mongoose.set('useCreateIndex', true);*/
+
 var Schema = mongoose.Schema;
 
 var roomSchema = new Schema({
-                              roomId: String,
-                              friendlyName: String,
-                              isPublic: Boolean
-                            });
+  roomId: { type: String, unique: true },
+  friendlyName: String,
+  isPublic: Boolean,
+  password: String,
+});
 
-var room = mongoose.model('roomEntry', roomSchema);
+//roomSchema.plugin(beautifyUnique);
+var room = mongoose.model("roomEntry", roomSchema);
 module.exports = room;
